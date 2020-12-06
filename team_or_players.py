@@ -20,18 +20,18 @@ def get_values(nba):
 	whole_nba = pd.DataFrame(team_values, columns = headers )
 	return whole_nba
 
-def get_all(player):
+def get_all_nba_info(player_or_team):
 	"""
 	Args:
 		player_or_team (boolean): boolean produced from UI to 
 		determine if getting information of player or team
+	Returns:
+		DF of all info in nba
 	"""
-	file_name = "players.p" if player == "Player" else "teams.p"
+	file_name = "players.p" if player_or_team == "Player" else "teams.p"
 	endpoint = leaguedashteamshotlocations.LeagueDashTeamShotLocations
-	column = "TEAM_NAME"
-	if player == "Player":
+	if player_or_team == "Player":
 		endpoint = leaguedashplayershotlocations.LeagueDashPlayerShotLocations
-		column = "PLAYER_NAME"
 
 	try:
 		whole_nba = pickle.load(open(file_name, "rb"))
@@ -40,7 +40,23 @@ def get_all(player):
 		nba = nba.get_dict()
 		whole_nba = get_values(nba)
 		pickle.dump(whole_nba, open(file_name, "wb"))
-	return whole_nba[column]
+
+	return whole_nba
+
+def get_all(player_or_team):
+	"""
+	Args:
+		Args:
+		player_or_team (boolean): boolean produced from UI to 
+		determine if getting information of player or team
+	Returns:
+		DF of all names/teams
+	"""
+	column = "TEAM_NAME"
+	if player_or_team == "Player":
+		column = "PLAYER_NAME"
+
+	return get_all_nba_info(player_or_team)[column]
 
 
 

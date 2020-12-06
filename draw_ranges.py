@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 spotList = []
 
 
-def draw_circles(size, shot_data):
+def draw_circles(size, shot_data, averages):
     """
     Args:
         size (int): the size of the circles for the shot ranges
@@ -17,16 +17,7 @@ def draw_circles(size, shot_data):
     global spotList
     shot = shot_data[0]
     minimum = shot_data[1]
-    maximum = shot_data[2]
-    for_average = shot_data[3]
-    averages = []
-    #print(for_average)
-    for spots in range( 4 if size == 8 else 6):
-        field_goal_makes = for_average.iloc[:, [spots*2]].sum()
-        field_goal_attempts =  for_average.iloc[:, [spots*2 + 1]].sum()
-        averages.append(field_goal_makes[0] / (field_goal_attempts[0]))
-
-    #print(averages)
+    maximum = shot_data[2]    
     ax = plt.gca()
     if(len(shot) == 0):
         return

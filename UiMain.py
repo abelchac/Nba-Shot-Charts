@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 from draw_ranges import *
 from team_or_players import  *
 from get_shots import  *
-
+from playerTeamClass import PlayerTeamAverage
 
 root = None
 listbox = None
@@ -74,10 +74,12 @@ def update():
 	draw_court()
 
 
-	
+	averages = PlayerTeamAverage()
 	if(len(selectedPlayerTeam) != 0 and zoneClickString != "By Zone"):
 		shot_data = get_shot(teamOrPlayer == "Player", selectedPlayerTeam)
-		draw_circles(int(zoneClickString[0]), shot_data)
+		averages.cur_shot = zoneClickString
+		print(vars(averages).items())
+		draw_circles(int(zoneClickString[0]), shot_data, averages)
 
 	canvas.draw()
 
@@ -105,8 +107,8 @@ if __name__ == "__main__":
 	canvas.draw()
 
 	button = tkinter.Button(master=root, text="Quit", command=root.quit)
-	ZoneOrDistance = Label(root, text = "Zone/Distance", anchor='w')
-	ZoneOrDistanceList = ["5ft Range", "8ft Range", "By Zone"]
+	ZoneOrDistance = Label(root, text = "ZoneDistance", anchor='w')
+	ZoneOrDistanceList = ["5ft Range", "8ft Range"]
 	
 	playerOrTeam = Label(root, text = "Team/Player", anchor='w')
 	playerOrTeamList = ["Team", "Player"]
