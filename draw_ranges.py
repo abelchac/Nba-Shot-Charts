@@ -37,10 +37,10 @@ def draw_circles(ax, size, shot_data, averages, teamOrPlayer):
 
         if(cur_value >= cur_average):
             set_color = 'green'
-            cur_value = min(((cur_value - cur_average )) / (cur_max - cur_average) + .08, .95) 
+            cur_value = min(.65*((cur_value - cur_average )) / (cur_max - cur_average) + .02, .65) 
         else:
             set_color = 'red'
-            cur_value = min(1 - ((cur_value - cur_min)) / (cur_average - cur_min) + .08, .95)
+            cur_value = min(.65*(1 - ((cur_value - cur_min)) / (cur_average - cur_min)) + .02, .65)
 
         #print(cur_value)
         #print(cur_value)

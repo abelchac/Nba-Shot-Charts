@@ -158,6 +158,8 @@ if __name__ == "__main__":
   fig = plt.figure(figsize=(7,7))
   ax = fig.add_subplot(111)
   draw_court(ax)
+  ax.set_xticks([])
+  ax.set_yticks([])
   plt.xlim(-250,250)
   plt.ylim(422.5, -47.5)
 
@@ -185,7 +187,7 @@ if __name__ == "__main__":
   playerTeamDrop = OptionMenu(frame1, playerOrTeamClicked, *playerOrTeamList)
   playerOrTeam.grid(row = 1, column = 2)
   playerTeamDrop.grid(row = 2, column = 2)
-  listbox = Listbox(frame1, width = 40, height = 30, selectmode = SINGLE, exportselection  = False)
+  listbox = Listbox(frame1, width = 40, height = 45, selectmode = SINGLE, exportselection  = False)
   listbox.grid(row = 3, column = 2, rowspan=3)
   canvas.get_tk_widget().grid(row = 3, column = 1)
   root.after(100, update)

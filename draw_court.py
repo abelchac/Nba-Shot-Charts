@@ -1,6 +1,8 @@
 from matplotlib.patches import Circle, Rectangle, Arc
 
 def draw_court(ax=None, color='black', lw=2, outer_lines=False):
+    ax.set_xticks([])
+    ax.set_yticks([])
     if ax is None:
         ax = plt.gca()
     hoop = Circle((0, 0), radius=7.5, linewidth=lw, color=color, fill=False)
