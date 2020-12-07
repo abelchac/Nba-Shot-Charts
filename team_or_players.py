@@ -20,7 +20,7 @@ def get_values(nba):
 	whole_nba = pd.DataFrame(team_values, columns = headers )
 	return whole_nba
 
-def get_all_nba_info(player_or_team):
+def get_all_nba_info(player_or_team, zone="8ft Range"):
 	"""
 	Args:
 		player_or_team (boolean): boolean produced from UI to 
@@ -28,15 +28,17 @@ def get_all_nba_info(player_or_team):
 	Returns:
 		DF of all info in nba
 	"""
-	file_name = "players.p" if player_or_team == "Player" else "teams.p"
+	#print(player_or_team)
+	fname = zone.replace(" ", "_")
+	file_name = "players_{0}.p".format(fname) if player_or_team == "Player" else "teams_{0}.p".format(fname)
 	endpoint = leaguedashteamshotlocations.LeagueDashTeamShotLocations
 	if player_or_team == "Player":
 		endpoint = leaguedashplayershotlocations.LeagueDashPlayerShotLocations
-
+	#print(file_name)
 	try:
 		whole_nba = pickle.load(open(file_name, "rb"))
 	except:
-		nba = endpoint(distance_range = "By Zone", season="2019-20")
+		nba = endpoint(distance_range = zone, season="2019-20")
 		nba = nba.get_dict()
 		whole_nba = get_values(nba)
 		pickle.dump(whole_nba, open(file_name, "wb"))
@@ -55,7 +57,6 @@ def get_all(player_or_team):
 	column = "TEAM_NAME"
 	if player_or_team == "Player":
 		column = "PLAYER_NAME"
-
 	return get_all_nba_info(player_or_team)[column]
 
 

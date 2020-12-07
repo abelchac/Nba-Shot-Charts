@@ -3,7 +3,6 @@ from  tkinter import  *
 from matplotlib.backends.backend_tkagg import (
     FigureCanvasTkAgg, NavigationToolbar2Tk)
 # Implement the default Matplotlib key bindings.
-from matplotlib.backend_bases import key_press_handler
 from matplotlib.figure import Figure
 import numpy as np
 from DrawCourt import draw_court
@@ -76,9 +75,9 @@ def update():
 
 	averages = PlayerTeamAverage()
 	if(len(selectedPlayerTeam) != 0 and zoneClickString != "By Zone"):
-		shot_data = get_shot(teamOrPlayer == "Player", selectedPlayerTeam)
+		shot_data = get_shot(teamOrPlayer, selectedPlayerTeam, zoneClickString)
 		averages.cur_shot = zoneClickString
-		print(vars(averages).items())
+		#print(vars(averages).items())
 		draw_circles(int(zoneClickString[0]), shot_data, averages)
 
 	canvas.draw()
