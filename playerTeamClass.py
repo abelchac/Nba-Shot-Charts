@@ -47,7 +47,7 @@ class PlayerTeamAverage:
             field_goal_attempts_team_8ft =  team_info_8ft.iloc[:, spots*2 + 1].sum()
 
             self.shot_8ft.append(field_goal_makes_team_8ft / (field_goal_attempts_team_8ft))
-            self.shot_player_avg_8ft_attempts.append(team_info_8ft.iloc[:, spots*2 + 1].sum()
+            self.shot_team_avg_8ft_attempts.append(team_info_8ft.iloc[:, spots*2 + 1].sum()
                                                 /len(team_info_8ft.iloc[:, spots*2 + 1]))
             self.shot_player_avg_8ft_attempts.append(player_info_8ft.iloc[:, spots*2 + 1].sum()
                                                 /len(player_info_8ft.iloc[:, spots*2 + 1]))
