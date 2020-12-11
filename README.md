@@ -25,9 +25,9 @@ made by using tkinter, matplotlib, and seaborn.
 
 ## Installation
 ### Requirements:  
-  pip install nba_api  
-  pip install pandas  
-  pip install matplotlib
+	pip install nba_api  
+	pip install pandas  
+	pip install matplotlib
 
 ## Code Strucutre
 ### UiMain.py  
