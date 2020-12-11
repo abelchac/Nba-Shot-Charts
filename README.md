@@ -15,13 +15,13 @@ First-party modules:\
 Third-part modules:\
 	pandas\
 	matplot_lib\
-	nba_api\
+	nba_api
 
 ## Installation
   Requirements:\
   pip install nba_api\
   pip install pandas\
-  pip install matplotlib\
+  pip install matplotlib
 
 ## Code Strucutre
 
