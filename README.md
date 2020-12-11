@@ -1,20 +1,21 @@
 # NBA_SHOT_CHART
-NBA_SHOT_CHART produces a visualization of player or team 
-shot charts. Selection of player or team can be done 
-through the UI. As well as being able to choose the range
-of shots of either 8ft or 5ft. There are a total of 3 plots for
-visualization: Shot Chart on basketball court plot, 
-Shot Attempts of Selected vs League Average Attempts, and 
-Average of Selected vs Leauge Average. There are tkinter option
-menus for selecting the distance ranges of the shots and whether a player or 
-team will selected. The plot which contains the basketball court visualization
-plots wedges with either green or red, with the opacity of the color representing
-how far from the average the player is (greater the opacity the futher from average).
-The data for the shot charts is produced by using the
-nba_api library (https://github.com/swar/nba_api) and will
-be parsed using pandas. The data will be held peristently through
-pickle as not to time out the api. The visualization and UI will be 
-made by using tkinter, matplotlib, and seaborn. 
+	NBA_SHOT_CHART produces a visualization of player or team 
+	shot charts. Selection of player or team can be done 
+	through the UI. As well as being able to choose the range
+	of shots of either 8ft or 5ft. There are a total of 3 plots for
+	visualization: Shot Chart on basketball court plot, 
+	Shot Attempts of Selected vs League Average Attempts, and 
+	Average of Selected vs Leauge Average. There are tkinter option
+	menus for selecting the distance ranges of the shots and whether a player or 
+	team will selected. The plot which contains the basketball court visualization
+	plots wedges with either green or red, with the opacity of the color representing
+	how far from the average the player is (greater the opacity the futher from average).
+
+	The data for the shot charts is produced by using the
+	nba_api library (https://github.com/swar/nba_api) and will
+	be parsed using pandas. The data will be held peristently through
+	pickle as not to time out the api. The visualization and UI will be 
+	made by using tkinter, matplotlib, and seaborn. 
 
 ### First-party modules:  
 	tkinter  
