@@ -9,18 +9,19 @@ be parsed using pandas. The data will be held peristently through
 pickle as not to time out the api. The visualization and UI will be 
 made by using tkinter and matplotlib.  
 
-First-party modules:\
-	tkinter\
-	pickle\\
-Third-part modules:\
-	pandas\
-	matplot_lib\
-	nba_api
+First-party modules:  
+	tkinter  
+	pickle  
+
+Third-part modules:  
+	pandas  
+	matplot_lib  
+	nba_api  
 
 ## Installation
-  Requirements:\
-  pip install nba_api\
-  pip install pandas\
+  Requirements:  
+  pip install nba_api  
+  pip install pandas  
   pip install matplotlib
 
 ## Code Strucutre
