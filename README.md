@@ -11,7 +11,7 @@ made by using tkinter and matplotlib.
 
 First-party modules:\
 	tkinter\
-	pickle\
+	pickle\\
 Third-part modules:\
 	pandas\
 	matplot_lib\
