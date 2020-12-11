@@ -22,6 +22,15 @@ last_player_team = ""
 labels_5ft = ["LESS THAN 5FT", "5-9 FT.",  "10-14 FT.", "15-19 FT.", "20-24 FT.", "25-29 FT."]
 labels_8ft = ["LESS THAN 8FT."," 8-16 FT.",  "16-24 FT.", "24+ FT."]
 after_queue = []
+
+
+"""
+  Args:
+    None
+  Returns:
+    NONE, destroys the tkinter window
+    cancels any queued up jobs
+  """
 def close_window():
   for jobs in after_queue:
     root.after_cancel(jobs)

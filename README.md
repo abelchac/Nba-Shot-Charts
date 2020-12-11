@@ -14,17 +14,17 @@ be parsed using pandas. The data will be held peristently through
 pickle as not to time out the api. The visualization and UI will be 
 made by using tkinter, matplotlib, and seaborn. 
 
-First-party modules:  
+### First-party modules:  
 	tkinter  
 	pickle  
 
-Third-part modules:  
+### Third-part modules:  
 	pandas  
 	matplot_lib  
 	nba_api  
 
 ## Installation
-  Requirements:  
+### Requirements:  
   pip install nba_api  
   pip install pandas  
   pip install matplotlib
@@ -49,9 +49,10 @@ Third-part modules:
  	averages within the drawing phase easier as there is no need to shuffle through
  	different arrays as the data will be preset with the class object.  
 ### team_or_players.py  
- 	Within the file the functions are for getting information of the nba players and teams.  
+  Within the file the functions are for getting information of the nba players and teams.  
 ### get_shots.py  
- 	Contains function for getting the shot data of a single player or team.  
+  Contains function for getting the shot data of a single player or team.  
 
 
-## Usage 
+### Usage 
+Select the desired ZoneDistance from the 
