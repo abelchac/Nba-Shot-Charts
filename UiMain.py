@@ -59,7 +59,7 @@ def update():
 
   if(last_PT_Type !=  teamOrPlayer):
     listbox.delete(0,END)
-    print("hee")
+    #print("hee")
     listFill = get_all(teamOrPlayer)
     for item in listFill:
       listbox.insert(END, item)
@@ -88,6 +88,7 @@ def update():
   if(len(selectedPlayerTeam) != 0 and zoneClickString != "By Zone"):
     shot_data = get_shot(teamOrPlayer, selectedPlayerTeam, zoneClickString)
     averages.cur_shot = zoneClickString
+    averages.cur_selection = teamOrPlayer
     #print(vars(averages).items())
     draw_circles(ax, int(zoneClickString[0]), shot_data, averages, teamOrPlayer)
     label = labels_8ft if zoneClickString == "8ft Range" else labels_5ft
@@ -99,19 +100,32 @@ def update():
         else averages.shot_team_avg_5ft_attempts
     add_for_player = 3 if teamOrPlayer == "Player" else 0
     shots = [shot_data.iloc[0, 3 + add_for_player + 3 * spots] for spots in range( 4 if int(zoneClickString[0]) == 8 else 6)]
-    
+    player_team_avg = [shot_data.iloc[0, 4 + 3*spots + add_for_player] for spots in range(4 if int(zoneClickString[0]) == 8 else 6)]
     shot_list =  list(zip(label, shots, ['Specific Attempts' for spots in range( 4 if int(zoneClickString[0]) == 8 else 6)]))
     league_shots_list =  list(zip(label, volume, ['League Average Attempts' for spots in range( 4 if int(zoneClickString[0]) == 8 else 6)]))
+    player_team_shot_avg = list(zip(label, player_team_avg, ['Current Average' for spots in range( 4 if int(zoneClickString[0]) == 8 else 6)]))
+    leauge_avg = list(zip(label, averages[0::],['League Average' for spots in range( 4 if int(zoneClickString[0]) == 8 else 6)]))
     shot_list.extend(league_shots_list)
+    player_team_shot_avg.extend(leauge_avg)
     df = pd.DataFrame(shot_list, columns = ['Distance', 'Volume', "Attempts"]) 
+    df2 = pd.DataFrame(player_team_shot_avg, columns = ['Distance', 'Average', "Label"]) 
     ax2.clear()
+    ax3.clear()
     sns.set_style("whitegrid")
     sns.set_style("dark")
     g = sns.barplot(ax=ax2, x='Distance', y='Volume', hue='Attempts', data=df, palette="deep")
     g.set_xticklabels(labels=g.get_xticklabels(), rotation=90)
+    ax2.set_title("Attempts vs Average League Attempts")
+    if(teamOrPlayer != 'Player'):
+    	ax2.set_ylim(0, averages.get_max_attempts())
+    canvas2.draw()
+    g2 = sns.barplot(ax=ax3, x='Distance', y='Average', hue='Label', data=df2, palette="deep")
+    g2.set_xticklabels(labels=g.get_xticklabels(), rotation=90)
+    ax3.set_title("Current Average vs League Average")
+    #ax3.set_ylim(0, 1)
+    canvas3.draw()
 
 
-  canvas2.draw()
   canvas.draw()
   last_player_team = selectedPlayerTeam
   lastzone = zoneClickString
@@ -127,31 +141,35 @@ if __name__ == "__main__":
   """
 
   root = tkinter.Tk()
-  root.geometry("1350x800+300+100")
+  root.geometry("1400x800+300+100")
 
   frame1 = tkinter.Frame(root)
 
   averages = PlayerTeamAverage()
   fig2 = plt.figure(figsize=(4,4))
   ax2 = fig2.add_subplot(111)
+  ax2.set_title("Attempts vs Average League Attempts")
   canvas2 = FigureCanvasTkAgg(fig2, master=root) 
   canvas2.get_tk_widget().grid(row=0,column=1)
   plt.tight_layout()
   plt.xlim(0,6)
-  plt.ylim(0, max(averages.shot_team_avg_8ft_attempts))
-  plt.gcf().subplots_adjust(bottom=0.35)
+  plt.gcf().subplots_adjust(bottom=0.35, left=.2)
+  ax2.set_ylim(0, averages.get_max_attempts())
+
 
   canvas2.draw()
 
 
   fig3 = plt.figure(figsize=(4,4))
   ax3 = fig3.add_subplot(111)
+  ax3.set_title("Current Average vs League Average")
   sns.barplot(ax=ax3, x=labels_5ft, y=[0,0,0,0,0,0])
   plt.xticks(rotation=90)
   canvas3 = FigureCanvasTkAgg(fig3, master=root) 
   canvas3.get_tk_widget().grid(row=1,column=1)
   plt.tight_layout()
-  plt.ylim(0, 1)
+  plt.gcf().subplots_adjust(bottom=0.35, left=.2)
+  ax3.set_ylim(0, 1)
   canvas3.draw()
 
 

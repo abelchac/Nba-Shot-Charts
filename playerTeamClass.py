@@ -4,13 +4,15 @@ class PlayerTeamAverage:
     def __init__(self):
 
         self.cur_shot = "5ft Range"
-        self.shot_5ft = []
-        self.shot_8ft = []
+        self.cur_selection = "Player"
+        self.shot_5ft_avg = []
+        self.shot_8ft_avg = []
         self.shot_5ft_max = []
         self.shot_5ft_min = []
         self.shot_8ft_max = []
         self.shot_8ft_min = []
-
+        self.attempts_max_player = 0
+        self.attempts_max_team = 0
         self.shot_team_avg_5ft_attempts = []
         self.shot_team_avg_8ft_attempts = []
         self.shot_player_avg_5ft_attempts = []
@@ -20,6 +22,8 @@ class PlayerTeamAverage:
         team_info_5ft = get_all_nba_info("Team", "5ft Range")
         player_info_8ft = get_all_nba_info("Player", "8ft Range")
         player_info_5ft = get_all_nba_info("Player", "5ft Range")
+
+
 
         drop_list_team = ["TEAM_NAME", "TEAM_ID", "FG_PCT" ,"TEAM_ID"]
         drop_list_player = ["PLAYER_ID","TEAM_ID", "FG_PCT" ,"TEAM_ID", "TEAM_ABBREVIATION"]
@@ -37,7 +41,7 @@ class PlayerTeamAverage:
             self.shot_player_avg_5ft_attempts.append(player_info_5ft.iloc[:, spots*2 + 1].sum()
                                                 /len(player_info_5ft.iloc[:, spots*2 + 1]))
             # self.shot_team_avg_attempts.append()
-            self.shot_5ft.append(field_goal_makes_team_5ft / (field_goal_attempts_team_5ft))
+            self.shot_5ft_avg.append(field_goal_makes_team_5ft / (field_goal_attempts_team_5ft))
             divide = team_info_5ft.iloc[:, spots*2] / team_info_5ft.iloc[:, spots*2 + 1]
             self.shot_5ft_max.append(divide.max())
             self.shot_5ft_min.append(divide.min())
@@ -46,7 +50,10 @@ class PlayerTeamAverage:
             field_goal_makes_team_8ft = team_info_8ft.iloc[:, spots*2].sum()
             field_goal_attempts_team_8ft =  team_info_8ft.iloc[:, spots*2 + 1].sum()
 
-            self.shot_8ft.append(field_goal_makes_team_8ft / (field_goal_attempts_team_8ft))
+            self.attempts_max_team = max(self.attempts_max_team, max(team_info_8ft.iloc[:, spots*2 + 1]))
+            self.attempts_max_player = max(self.attempts_max_player, max(player_info_8ft.iloc[:, spots*2 + 1]))
+
+            self.shot_8ft_avg.append(field_goal_makes_team_8ft / (field_goal_attempts_team_8ft))
             self.shot_team_avg_8ft_attempts.append(team_info_8ft.iloc[:, spots*2 + 1].sum()
                                                 /len(team_info_8ft.iloc[:, spots*2 + 1]))
             self.shot_player_avg_8ft_attempts.append(player_info_8ft.iloc[:, spots*2 + 1].sum()
@@ -56,17 +63,17 @@ class PlayerTeamAverage:
             self.shot_8ft_min.append(divide.min())
     
     def __getitem__(self, position):
-        cur_shot_array = self.shot_5ft if self.cur_shot  == "5ft Range" else self.shot_8ft
+        cur_shot_array = self.shot_5ft_avg if self.cur_shot == "5ft Range" else self.shot_8ft_avg
         return cur_shot_array[position]
 
-    def get_min(self):
+    def get_min_avg(self):
+       return min(self.shot_8ft_min) if self.cur_shot == "8ft Range" else min(self.shot_5ft_min)
+
+    def get_max_attempts(self):
+        return self.attempts_max_player if self.cur_selection == "Player" else self.attempts_max_team
+
+    def get_min_list(self):
        return self.shot_8ft_min if self.cur_shot == "8ft Range" else self.shot_5ft_min
 
-    def get_max(self):
+    def get_max_list(self):
         return self.shot_8ft_max if self.cur_shot == "8ft Range" else self.shot_5ft_max
-
-
- 
-kk = PlayerTeamAverage()
-
-print(kk.shot_5ft)
