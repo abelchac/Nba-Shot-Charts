@@ -1,8 +1,6 @@
 from matplotlib.patches import Circle, Rectangle, Arc
-
+import matplotlib.pyplot as plt
 def draw_court(ax=None, color='black', lw=2, outer_lines=False):
-    ax.set_xticks([])
-    ax.set_yticks([])
     if ax is None:
         ax = plt.gca()
     hoop = Circle((0, 0), radius=7.5, linewidth=lw, color=color, fill=False)
@@ -11,7 +9,6 @@ def draw_court(ax=None, color='black', lw=2, outer_lines=False):
                           fill=False)
     inner_box = Rectangle((-60, -47.5), 120, 190, linewidth=lw, color=color,
                           fill=False)
-
     top_free_throw = Arc((0, 142.5), 120, 120, theta1=0, theta2=180,
                          linewidth=lw, color=color, fill=False)
     bottom_free_throw = Arc((0, 142.5), 120, 120, theta1=180, theta2=0,
@@ -23,10 +20,14 @@ def draw_court(ax=None, color='black', lw=2, outer_lines=False):
     corner_three_b = Rectangle((220, -47.5), 0, 140, linewidth=lw, color=color)
     three_arc = Arc((0, 0), 475, 475, theta1=22, theta2=158, linewidth=lw,
                     color=color)
+
+
+
     center_outer_arc = Arc((0, 422.5), 120, 120, theta1=180, theta2=0,
                            linewidth=lw, color=color)
     center_inner_arc = Arc((0, 422.5), 40, 40, theta1=180, theta2=0,
                            linewidth=lw, color=color)
+
     court_elements = [hoop, backboard, outer_box, inner_box, top_free_throw,
                       bottom_free_throw, restricted, corner_three_a,
                       corner_three_b, three_arc, center_outer_arc,
@@ -39,5 +40,6 @@ def draw_court(ax=None, color='black', lw=2, outer_lines=False):
 
     for element in court_elements:
         ax.add_patch(element)
+
 
     return ax

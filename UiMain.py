@@ -5,7 +5,7 @@ from matplotlib.backends.backend_tkagg import (
 # Implement the default Matplotlib key bindings.
 from matplotlib.figure import Figure
 import numpy as np
-from DrawCourt import draw_court
+from draw_court import draw_court
 import matplotlib.pyplot as plt
 from draw_ranges import *
 from team_or_players import  *
@@ -21,6 +21,12 @@ last_PT_Type = ""
 last_player_team = ""
 labels_5ft = ["LESS THAN 5FT", "5-9 FT.",  "10-14 FT.", "15-19 FT.", "20-24 FT.", "25-29 FT."]
 labels_8ft = ["LESS THAN 8FT."," 8-16 FT.",  "16-24 FT.", "24+ FT."]
+after_queue = []
+def close_window():
+  for jobs in after_queue:
+    root.after_cancel(jobs)
+  
+  root.destroy()
 
 def list_select():
   """
@@ -47,6 +53,8 @@ def update():
     None, but will update the shot chart to 
     reflect the currently selected player
   """
+  if(len(after_queue) > 0):
+    after_queue.pop()
   global lastzone
   global last_PT_Type
   global last_player_team
@@ -78,7 +86,7 @@ def update():
 
   if(ZoneClikced.get() == lastzone 
     and (selectedPlayerTeam == last_player_team)):
-    root.after(100, update)
+    after_queue.append(root.after(100, update))
     return
 
   remove_fts()
@@ -131,7 +139,7 @@ def update():
   lastzone = zoneClickString
   last_PT_Type = teamOrPlayer
 
-  root.after(100, update)
+  after_queue.append(root.after(100, update))
 
 
 
@@ -208,6 +216,6 @@ if __name__ == "__main__":
   listbox = Listbox(frame1, width = 40, height = 45, selectmode = SINGLE, exportselection  = False)
   listbox.grid(row = 3, column = 2, rowspan=3)
   canvas.get_tk_widget().grid(row = 3, column = 1)
-  root.after(100, update)
+  root.protocol("WM_DELETE_WINDOW", close_window)
+  update()
   root.mainloop()
-
