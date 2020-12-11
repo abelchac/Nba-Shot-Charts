@@ -7,7 +7,9 @@ visualization: Shot Chart on basketball court plot,
 Shot Attempts of Selected vs League Average Attempts, and 
 Average of Selected vs Leauge Average. There are tkinter option
 menus for selecting the distance ranges of the shots and whether a player or 
-team will selected.
+team will selected. The plot which contains the basketball court visualization
+plots wedges with either green or red, with the opacity of the color representing
+how far from the average the player is (greater the opacity the futher from average).
 The data for the shot charts is produced by using the
 nba_api library (https://github.com/swar/nba_api) and will
 be parsed using pandas. The data will be held peristently through
@@ -49,10 +51,14 @@ made by using tkinter, matplotlib, and seaborn.
  	averages within the drawing phase easier as there is no need to shuffle through
  	different arrays as the data will be preset with the class object.  
 ### team_or_players.py  
-  Within the file the functions are for getting information of the nba players and teams.  
+	Within the file the functions are for getting information of the nba players and teams.  
 ### get_shots.py  
-  Contains function for getting the shot data of a single player or team.  
+	Contains function for getting the shot data of a single player or team.  
 
 
-### Usage 
-Select the desired ZoneDistance from the 
+## Usage 
+	python ./UiMain.py
+	Select the desired ZoneDistance from the ZoneDistance option menu,
+	do the same for selecting if you would like a team or a player. 
+	After those two selection are made, pick a player or team that 
+	you would like to have their data visualized. 
