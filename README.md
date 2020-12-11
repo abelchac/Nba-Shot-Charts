@@ -30,26 +30,27 @@ Third-part modules:
   pip install matplotlib
 
 ## Code Strucutre
- UiMain.py  
+### UiMain.py  
  	Handles Displaying UI elements and tkinter windows. The values 
  	for the selected player/team and shot range is adjusted within this file.
  	The players and teams are listed within a listbox with the data visualized 
  	with matplotlib and seaborn plots to the left and right.  
- draw_court.py  
+
+### draw_court.py  
  	Credit to http://savvastjortjoglou.com/nba-shot-sharts.html for code for 
  	visualizing a basketball court in matplot lib that is functional with 
  	data provided by nba_api.  
- draw_ranges.py  
+### draw_ranges.py  
  	Creates the matplotlib elements (wedges) for displaying on the basketball court axes.  
- playerTeamClass.py  
+### playerTeamClass.py  
  	Class for generating averages and shot attempts that remain constant throughout the
  	life time of the program. The magic methods are the __init__ for the initialization
  	of the class and __getitem__ to make the class subscriptable making the getting of the
  	averages within the drawing phase easier as there is no need to shuffle through
  	different arrays as the data will be preset with the class object.  
- team_or_players.py  
+### team_or_players.py  
  	Within the file the functions are for getting information of the nba players and teams.  
- get_shots.py  
+### get_shots.py  
  	Contains function for getting the shot data of a single player or team.  
 
 
