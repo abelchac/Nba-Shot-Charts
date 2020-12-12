@@ -1,5 +1,7 @@
 from matplotlib.patches import Circle, Rectangle, Arc
 import matplotlib.pyplot as plt
+
+
 def draw_court(ax=None, color='black', lw=2, outer_lines=False):
     if ax is None:
         ax = plt.gca()
@@ -21,8 +23,6 @@ def draw_court(ax=None, color='black', lw=2, outer_lines=False):
     three_arc = Arc((0, 0), 475, 475, theta1=22, theta2=158, linewidth=lw,
                     color=color)
 
-
-
     center_outer_arc = Arc((0, 422.5), 120, 120, theta1=180, theta2=0,
                            linewidth=lw, color=color)
     center_inner_arc = Arc((0, 422.5), 40, 40, theta1=180, theta2=0,
@@ -40,6 +40,5 @@ def draw_court(ax=None, color='black', lw=2, outer_lines=False):
 
     for element in court_elements:
         ax.add_patch(element)
-
 
     return ax
