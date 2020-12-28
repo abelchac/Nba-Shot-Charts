@@ -16,7 +16,7 @@
 	be parsed using pandas. The data will be held peristently through
 	pickle as not to time out the api. The visualization and UI will be 
 	made by using tkinter, matplotlib, and seaborn. 
-
+![](images/example.png)
 ### First-party modules:  
 	tkinter  
 	pickle  
